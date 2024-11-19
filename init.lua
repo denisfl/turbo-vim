@@ -25,6 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup("plugins", {
   defaults = {
+    lazy = false,
     -- Version will be used for plugins without a version specifier
     version = "*"
   },
