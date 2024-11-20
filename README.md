@@ -50,7 +50,7 @@ A basic set of carefully selected plugins:
 mv ~/.config/nvim ~/.config/nvim.bak
 
 # Install TurboVim
-git clone https://github.com/yourusername/turbovim.git ~/.config/nvim
+git clone git@github.com:denisfl/turbo-vim.git ~/.config/nvim
 
 # First launch will install all plugins automatically
 nvim
