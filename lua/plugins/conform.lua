@@ -1,4 +1,3 @@
--- lua/plugins/conform.lua
 return {
   'stevearc/conform.nvim',
   event = { "BufWritePre" },
@@ -16,6 +15,7 @@ return {
         python = { "isort", "black" },
         javascript = { "prettier" },
         typescript = { "prettier" },
+        vue = { "prettier" }, 
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
         css = { "prettier" },
@@ -27,23 +27,56 @@ return {
       
       formatters = {
         prettier = {
-	  command = vim.fn.executable("prettier") == 1 and "prettier" or "npx prettier",
-          timeout_ms = 3000,
-
-          env = {
-            PRETTIERD_LOCAL_PRETTIER_ONLY = "1",
+          -- Check for a local prettier installation
+          command = function()
+            local local_prettier = vim.fn.findfile("node_modules/.bin/prettier", ".;")
+            if local_prettier ~= "" then
+              return local_prettier
+            end
+            return "prettier"
+          end,
+          args = {
+            "--stdin-filepath",
+            "$FILENAME",
           },
+          range_args = function(ctx)
+            return {
+              "--stdin-filepath",
+              "$FILENAME",
+              "--range-start=" .. ctx.range.start,
+              "--range-end=" .. ctx.range["end"],
+            }
+          end,
+          cwd = function()
+            -- Look for a local prettier configuration
+            local prettier_config = vim.fn.findfile(".prettierrc", ".;")
+            local package_json = vim.fn.findfile("package.json", ".;")
+            if prettier_config ~= "" then
+              return vim.fn.fnamemodify(prettier_config, ":h")
+            elseif package_json ~= "" then
+              return vim.fn.fnamemodify(package_json, ":h")
+            end
+            return vim.fn.getcwd()
+          end,
         },
       },
     })
 
-    -- Маппинг для ручного форматирования
-    vim.keymap.set({ "n", "v" }, "<leader>f", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 3000,
-      })
-    end, { desc = "Format file or range" })
+    local function format_file()
+      local has_prettier_config = vim.fn.findfile(".prettierrc", ".;") ~= "" or
+                                vim.fn.findfile("package.json", ".;") ~= ""
+      
+      if has_prettier_config then
+        conform.format({
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 3000,
+        })
+      else
+        vim.notify("No prettier config found!", vim.log.levels.WARN)
+      end
+    end
+
+    vim.keymap.set({ "n", "v" }, "<leader>f", format_file, { desc = "Format file or range" })
   end
 }
