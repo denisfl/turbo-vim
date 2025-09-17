@@ -4,16 +4,10 @@ return {
   main = "ibl",
   opts = {
     indent = {
-      char = "│",
-      tab_char = "│",
+      char = "▏",
     },
     scope = {
-      enabled = true,
-      show_start = true,
-      show_end = true,
-      injected_languages = true,
-      highlight = {"Function", "Label"},
-      priority = 500,
+      enabled = false,
     },
     exclude = {
       filetypes = {

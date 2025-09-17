@@ -23,4 +23,11 @@ opt.winbar = nil         -- Disable the window toolbar
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = 'unnamedplus'
 
- 
+-- Performance optimizations
+opt.updatetime = 100     -- Faster updates
+opt.timeoutlen = 300     -- Faster key sequence timeout
+opt.ttimeoutlen = 50     -- Faster escape sequences
+opt.redrawtime = 10000   -- Max time for redraw
+opt.synmaxcol = 200      -- Limit syntax highlighting column
+
+

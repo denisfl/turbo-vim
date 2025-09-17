@@ -34,11 +34,9 @@ require("lazy").setup("plugins", {
     colorscheme = { "tokyonight" },
   },
   checker = {
-    -- Automatically check for plugin updates
-    enabled = true,
-    notify = true,
-    -- Check for updates every week
-    frequency = 604800,
+    -- Disable automatic plugin update checking
+    enabled = false,
+    notify = false,
   },
   performance = {
     cache = {

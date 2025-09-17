@@ -2,6 +2,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
+    lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
@@ -16,20 +17,20 @@ return {
           -- Layout configuration
           layout_config = {
             prompt_position = "top",
-            width = 0.75,
-            height = 0.75,
+            width = 0.6,
+            height = 0.6,
             preview_cutoff = 120,
             horizontal = { mirror = false },
             vertical = { mirror = false },
           },
-          -- Внешний вид
+          -- Appearance
           sorting_strategy = "ascending",
           prompt_prefix = " ",
           selection_caret = " ",
           entry_prefix = " ",
           initial_mode = "insert",
           layout_strategy = "horizontal",
-          -- Игнорируемые паттерны
+          -- Ignored patterns
           file_ignore_patterns = { 
             "%.git/.*",
             "node_modules/.*",
@@ -46,8 +47,12 @@ return {
           use_less = true,
           set_env = { ['COLORTERM'] = 'truecolor' },
           path_display = { "truncate" },
+          -- Performance optimization
+          cache_picker = {
+            num_pickers = 10,
+          },
           
-          -- Маппинги внутри Telescope
+          -- Mappings inside Telescope
           mappings = {
             i = {
               ["<C-j>"] = "move_selection_next",
@@ -60,7 +65,7 @@ return {
             }
           }
         },
-        -- Расширения
+        -- Extensions
         extensions = {
           fzf = {
             fuzzy = true,
@@ -83,11 +88,11 @@ return {
         }
       })
       
-      -- Загрузка расширений
+      -- Load extensions
       telescope.load_extension('fzf')
       telescope.load_extension('file_browser')
       
-      -- Маппинги
+      -- Mappings
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live grep' })

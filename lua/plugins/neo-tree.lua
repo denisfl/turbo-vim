@@ -1,6 +1,7 @@
 -- lua/plugins/neo-tree.lua
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  lazy = false,
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -20,16 +21,17 @@ return {
     end
 
     require("neo-tree").setup({
-      close_if_last_window = true,  -- Закрывать Neo-tree если это последнее окно
+      close_if_last_window = true,  -- Close Neo-tree if it's the last window
       window = {
         position = "right",
-        width = 40,
+        width = 30,
         mapping_options = {
           noremap = true,
           nowait = true,
         },
         mappings = {
-          ["<space>"] = "none", -- отключаем конфликтующие маппинги
+          ["<space>"] = "none", -- disable conflicting mappings
+          ["<tab>"] = "toggle_node", -- quick navigation
         }
       },
       filesystem = {
@@ -81,18 +83,27 @@ return {
         {
           event = "file_opened",
           handler = function()
-            -- Опционально: автоматически возвращаем фокус на файл при открытии
+            -- Optional: automatically return focus to file when opening
             vim.cmd("wincmd p")
           end
         },
       },
     })
 
-    -- Маппинги
+    -- Mappings
     vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
     vim.keymap.set('n', '<leader>o', smart_focus, { noremap = true, silent = true })
 
-    -- Автоматически закрывать Neo-tree при выходе из Vim
+    -- Automatically open Neo-tree when starting with a directory
+    vim.api.nvim_create_autocmd('VimEnter', {
+      callback = function()
+        if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+          vim.cmd("Neotree show")
+        end
+      end
+    })
+
+    -- Automatically close Neo-tree when exiting Vim
     vim.api.nvim_create_autocmd('VimLeavePre', {
       callback = function()
         vim.cmd("Neotree close")

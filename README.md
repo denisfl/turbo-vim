@@ -1,32 +1,34 @@
 # ⚡️ TurboVim
 
-Minimalist and fast Neovim configuration built on the principles of simplicity and efficiency.
+Lightweight and fast Neovim configuration optimized for performance and usability.
 
 ## 🎯 Philosophy
 
-- Minimal plugins, maximum efficiency
-- Simple and clear configuration structure
-- Quick start without unnecessary settings
-- Only the most essential tools
+- Lightweight plugins with performance optimizations
+- Clean and intuitive interface
+- Fast startup with smart lazy loading
+- Essential tools without bloat
 
 ## ⚡️ Plugins
 
-A basic set of carefully selected plugins:
+Carefully selected and optimized plugins:
 
-- **Interface**
+- **Interface & Navigation**
+  - tokyonight (beautiful minimalist theme)
+  - lualine (lightweight status line)
+  - neo-tree (fast file manager)
+  - alpha-nvim (clean dashboard)
+  - indent-blankline (minimal visual indents)
 
-  - tokyonight (beautiful and minimalist theme)
-  - lualine (status line)
-  - indent-blankline (visual indents)
-  - todo-comments (TODO highlighting)
-
-- **Development**
-  - telescope (fuzzy finder)
+- **Development Tools**
+  - telescope (fuzzy finder with performance tweaks)
   - copilot (AI code completion)
-  - treesitter (advanced syntax highlighting)
-  - conform (formatting)
+  - treesitter (syntax highlighting)
+  - conform (code formatting)
   - gitsigns (git integration)
-  - comment (smart comments)
+  - comment (smart commenting)
+  - todo-comments (TODO highlighting)
+  - editorconfig (consistent coding style)
 
 ## 📁 Structure
 
@@ -58,19 +60,53 @@ nvim
 
 ## 🗺 Key Bindings
 
-- `Space` - leader key
-- `<leader>ff` - find files
-- `<leader>fg` - find text
-- `<leader>f` - format code
-- `Tab` - accept Copilot suggestion
-- `gcc` - comment line
-- `]c` / `[c` - next/previous git change
-- `]t` / `[t` - next/previous TODO comment
+### Leader Key: `Space`
+
+### File Management
+- `<leader>e` - Toggle file manager (Neo-tree)
+- `<leader>o` - Focus file manager
+- `<leader>ff` - Find files (Telescope)
+- `<leader>fg` - Live grep (search in files)
+- `<leader>fb` - Find buffers
+- `<leader>fr` - Recent files
+- `<leader>fe` - File browser
+
+### Basic Operations
+- `<leader>w` - Save file
+- `<leader>q` - Quit
+- `<leader>c` - Close buffer
+- `<leader>f` - Format code
+- `Esc` - Clear search highlights
+
+### Window Navigation
+- `Ctrl+h` - Move to left window
+- `Ctrl+j` - Move to bottom window
+- `Ctrl+k` - Move to top window
+- `Ctrl+l` - Move to right window
+
+### Development
+- `Tab` - Accept Copilot suggestion
+- `gcc` - Comment/uncomment line
+- `]c` / `[c` - Next/previous git change
+- `]t` / `[t` - Next/previous TODO comment
+
+### Git
+- `<leader>fc` - Git commits
+- `<leader>fs` - Git status
 
 ## 🛠 Requirements
 
-- Neovim >= 0.9.0
+- Neovim >= 0.10.0
 - git
-- ripgrep (for telescope)
+- ripgrep (for telescope search)
 - nodejs (for copilot)
-- Nerd Font
+- Nerd Font (for icons)
+- make (for telescope-fzf-native compilation)
+
+## ⚡️ Performance Features
+
+- **Optimized startup**: Disabled unnecessary built-in plugins
+- **Smart caching**: Plugin cache enabled for faster loading
+- **Minimal UI**: Streamlined status line and file manager
+- **Fast updates**: Reduced timeouts and update intervals
+- **Syntax optimization**: Limited syntax highlighting for large files
