@@ -22,6 +22,7 @@ return {
 
     require("neo-tree").setup({
       close_if_last_window = true,  -- Close Neo-tree if it's the last window
+      popup_border_style = "rounded",
       window = {
         position = "right",
         width = 30,
@@ -80,13 +81,6 @@ return {
             vim.opt_local.signcolumn = "auto"
           end,
         },
-        {
-          event = "file_opened",
-          handler = function()
-            -- Optional: automatically return focus to file when opening
-            vim.cmd("wincmd p")
-          end
-        },
       },
     })
 
@@ -99,6 +93,29 @@ return {
       callback = function()
         if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
           vim.cmd("Neotree show")
+          -- Focus back to the main window
+          vim.cmd("wincmd p")
+        end
+      end
+    })
+
+    -- Close Neo-tree when the last buffer is closed
+    vim.api.nvim_create_autocmd('QuitPre', {
+      callback = function()
+        local tree_wins = {}
+        local floating_wins = {}
+        local wins = vim.api.nvim_list_wins()
+        for _, w in ipairs(wins) do
+          local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
+          if bufname:match("neo%-tree") ~= nil then
+            table.insert(tree_wins, w)
+          end
+          if vim.api.nvim_win_get_config(w).relative ~= '' then
+            table.insert(floating_wins, w)
+          end
+        end
+        if #wins - #floating_wins - #tree_wins == 1 then
+          vim.cmd("Neotree close")
         end
       end
     })
