@@ -14,21 +14,21 @@ Lightweight and fast Neovim configuration optimized for performance and usabilit
 Carefully selected and optimized plugins:
 
 - **Interface & Navigation**
-  - tokyonight (beautiful minimalist theme)
-  - lualine (lightweight status line)
-  - neo-tree (fast file manager)
-  - alpha-nvim (clean dashboard)
-  - indent-blankline (minimal visual indents)
+  - [tokyonight](https://github.com/folke/tokyonight.nvim) - Beautiful minimalist theme
+  - [lualine](https://github.com/nvim-lualine/lualine.nvim) - Lightweight status line
+  - [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim) - Fast file manager
+  - [alpha-nvim](https://github.com/goolord/alpha-nvim) - Clean dashboard
+  - [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim) - Minimal visual indents
 
 - **Development Tools**
-  - telescope (fuzzy finder with performance tweaks)
-  - copilot (AI code completion)
-  - treesitter (syntax highlighting)
-  - conform (code formatting)
-  - gitsigns (git integration)
-  - comment (smart commenting)
-  - todo-comments (TODO highlighting)
-  - editorconfig (consistent coding style)
+  - [telescope](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder with performance tweaks
+  - [copilot](https://github.com/github/copilot.vim) - AI code completion
+  - [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Syntax highlighting
+  - [conform](https://github.com/stevearc/conform.nvim) - Code formatting
+  - [gitsigns](https://github.com/lewis6991/gitsigns.nvim) - Git integration
+  - [comment](https://github.com/numToStr/Comment.nvim) - Smart commenting
+  - [todo-comments](https://github.com/folke/todo-comments.nvim) - TODO highlighting
+  - [editorconfig](https://github.com/editorconfig/editorconfig-vim) - Consistent coding style
 
 ## 📁 Structure
 
@@ -62,12 +62,13 @@ nvim
 
 ### Leader Key: `Space`
 
-### File Management
+### File Management & Search
 - `<leader>e` - Toggle file manager (Neo-tree)
 - `<leader>o` - Focus file manager
-- `<leader>ff` - Find files (Telescope)
-- `<leader>fg` - Live grep (search in files)
-- `<leader>fb` - Find buffers
+- `<leader>ff` - Find files by name (fuzzy search)
+- `<leader>fg` - **Live grep** - Full-text search across project (real-time)
+- `<leader>fw` - Find word under cursor across project
+- `<leader>fb` - Find open buffers
 - `<leader>fr` - Recent files
 - `<leader>fe` - File browser
 
@@ -102,6 +103,37 @@ nvim
 - nodejs (for copilot)
 - Nerd Font (for icons)
 - make (for telescope-fzf-native compilation)
+
+## 🔍 Full-Text Search Guide
+
+### Using Live Grep (`<leader>fg`)
+The most powerful search feature for finding text across your entire project:
+
+1. **Start search**: Press `<Space>fg`
+2. **Type your query**: Enter search term (supports regex)
+3. **Navigate results**: Use `Ctrl+j/k` to move up/down
+4. **Preview files**: See file content in right panel
+5. **Open file**: Press `Enter` to jump to location
+
+### Search Features
+- **Real-time results** as you type
+- **Fuzzy matching** with smart case sensitivity
+- **File preview** with syntax highlighting
+- **Regex support** for advanced patterns
+- **Respects gitignore** and excludes build folders
+- **Fast FZF integration** for performance
+
+### Other Search Options
+- `<leader>fw` - Search word under cursor
+- `<leader>ff` - Find files by name
+- `<leader>fb` - Search open buffers
+
+## ⚙️ Font Configuration
+
+This configuration includes **JetBrains Mono** with ligatures support:
+- **GUI Neovim**: Font configured automatically
+- **Terminal**: Set JetBrains Mono in your terminal settings
+- **Ligatures**: `==`, `!=`, `->`, `=>` display as single characters
 
 ## ⚡️ Performance Features
 

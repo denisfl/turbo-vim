@@ -23,6 +23,17 @@ opt.winbar = nil         -- Disable the window toolbar
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = 'unnamedplus'
 
+-- Font configuration
+if vim.g.neovide then
+  vim.o.guifont = "JetBrains Mono:h12"
+  vim.g.neovide_cursor_animation_length = 0.13
+  vim.g.neovide_cursor_trail_length = 0.8
+  vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_remember_window_size = true
+elseif vim.fn.has("gui_running") == 1 then
+  vim.opt.guifont = "JetBrains\\ Mono:h12"
+end
+
 -- Performance optimizations
 opt.updatetime = 100     -- Faster updates
 opt.timeoutlen = 300     -- Faster key sequence timeout
